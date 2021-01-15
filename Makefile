@@ -12,5 +12,5 @@ clean:
 # and I worry about overwriting files if the two render steps executed at the
 # same time via a "make -j x" command.
 ${HTMLBOOK}: ${RMDFILES}
-	RETICULATE_PYTHON=`which python3` PYTHONPATH=.. r -e 'bookdown::render_book("index.Rmd","bookdown::gitbook",clean=T)'
+	RETICULATE_PYTHON=`which python3` R --no-save -e 'bookdown::render_book("index.Rmd","bookdown::gitbook",clean=T)'
 
