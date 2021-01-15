@@ -3,7 +3,6 @@ title: "fwdpy11 recipes"
 author: "Kevin R Thornton"
 date: "`r Sys.Date()`"
 documentclass: book
-site: "bookdown::bookdown_site"
 bookdown::gitbook:
     split_by: chapter
 urlcolor: blue
@@ -13,3 +12,5 @@ urlcolor: blue
 library(reticulate)
 OUTPUT_TYPE <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
+
+# Preface
