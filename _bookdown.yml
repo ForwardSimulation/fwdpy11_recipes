@@ -1,0 +1,10 @@
+rmd_files:
+    html: ["index.Rmd",
+        "chapters/introduction.Rmd",
+        "chapters/des.Rmd",
+        "chapters/recombination.Rmd",
+        "chapters/discretedemography.Rmd",
+        ]
+output_dir: book_output
+book_filename: fwdpy11_recipes.Rmd
+delete_merged_file: True
