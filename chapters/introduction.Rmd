@@ -1,2 +1,12 @@
 # Introduction
 
+## Key imports
+
+The following imports will be used throughout:
+
+```{python}
+import fwdpy11
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+```
