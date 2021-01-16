@@ -10,3 +10,18 @@ knitr::opts_chunk$set(attr.source=".numberLines")
 ```
 
 # Preface
+
+```{python getversion, echo=FALSE}
+import fwdpy11
+fp11_version = fwdpy11.__version__
+```
+
+This book provides additional recipes for the [fwdpy11](https://github.com/molpopgen/fwdpy11) simulation software.
+The recipes complement examples found in the [primary documentation](https://fwdpy11.readthedocs.io).
+Some recipes may be repeated here.
+
+The book is written using [R Markdown](https://rmarkdown.rstudio.com/).
+The `Python` code blocks are executed via [reticulate](https://rstudio.github.io/reticulate/).
+The book is always current with respect to the current `fwdpy11` [release](https://pypi.org/project/fwdpy11/).
+
+The contents of this book are generated using `fwdpy11` version `r py$fp11_version`.
