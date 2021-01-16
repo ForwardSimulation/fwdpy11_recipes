@@ -1,6 +1,7 @@
 install.packages(c("bookdown", 
-                   "knitr",
+                   "rmarkdown",
                    "reticulate"
                    ),
+                 lib="~/.local/Rlibs",
                  nCpus=2,
                  ask=FALSE)

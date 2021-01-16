@@ -3,7 +3,7 @@ name: Build pull requests
 on:
   pull_request:
   push:
-    branches: [main, dev]
+    branches: [main]
 
 jobs:
   test:
@@ -26,6 +26,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      # We install the R dependencies first
+      # Later, Python dependencies will go into the same place.
+      # Python will silently update dependencies if needed,
+      # and they'll get cached, too.
+      - name: Cache dependancies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.local
+          key: ${{ matrix.python }}-${{ hashFiles('requirements/install.R') }}
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
@@ -47,10 +59,14 @@ jobs:
           $CXX -v
           $CC -v
 
+      - name: Edit PATH
+        run: |
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
       - name: Install Python dependencies
         run: |
-          python -m pip install "pybind11[global]"
-          python -m pip install --upgrade -r requirements/requirements.txt
+          python -m pip install --user  "pybind11[global]"
+          python -m pip install --user --upgrade -r requirements/requirements.txt
 
       - name: Test that fwdpy11 is discoverable
         run: |
@@ -58,9 +74,11 @@ jobs:
           python -m fwdpy11 --help
 
       - name: Install R dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          sudo R --no-save < requirements/install.R
+          mkdir ~/.local/Rlibs
+          R --no-save < requirements/install.R
 
       - name: Build the book
         run: |
-          make
+          R_LIBS_USER=~/.local/Rlibs make
