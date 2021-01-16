@@ -2,10 +2,6 @@
 title: "fwdpy11 recipes"
 author: "Kevin R Thornton"
 date: "`r Sys.Date()`"
-documentclass: book
-bookdown::gitbook:
-    split_by: chapter
-urlcolor: blue
 ---
 
 ```{r, echo=FALSE}
