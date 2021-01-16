@@ -81,6 +81,12 @@ jobs:
         run: |
           R_LIBS_USER=~/.local/Rlibs make
 
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: book_output
+          path: book_output/
+
   deploy:
     name: deploy
     needs: bookdown
