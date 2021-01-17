@@ -1,5 +1,41 @@
 # Extending fwdpy11 with C++
 
+## Analyzing population during a simulation {#freqtrackcpp}
+
+This section revisits concepts from Chapter \@ref(timeseries).
+
+### Tracking mutations over time
+
+#### Running the tracker
+
+This recipe revisits the [Python frequency tracker](#freqtrackpy) using a tracker written in C++.
+The tracker's code is shown below.
+
+```{python runcppfreqtracker, code=xfun::read_utf8('recipes/extendingwithcpp/runcppfreqtracker.py')}
+```
+
+We will reuse code from the previous recipe to convert the output to a data frame and plot:
+
+```{python plotcppfreqtrackeroutput, fig.cap="So many sweeps, again. This should look identical to Figure \\@ref(fig:plotpyfreqtrackeroutput)."}
+df = traj2df(recorder.trajectories, pop.N)
+plot_traj_df(df, minlen=10);
+```
+
+### The C++ code
+
+The code is relatively straightforward C++.
+The main difference from the Python version is that we use `unordered_map` as our associative container.
+C++ does not have hashing functions for tuples, meaning that we have to adjust our scheme a bit.
+Here, we use nested associative containers.
+The outer container hashes the mutations' origin times.
+The inner container hashes position.
+
+We manually define a property to convert the data to a `dict`.
+
+```{Rcpp, code=xfun::read_utf8('fp11recipes/freqtrackercpp.cc'), eval=FALSE}
+```
+
+
 ## Building with cmake
 
 It is arguably easiest to build extension with [cmake](https://www.cmake.org).

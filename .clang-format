@@ -1,0 +1,8 @@
+---
+Language: Cpp
+BasedOnStyle: Mozilla
+BreakConstructorInitializers: BeforeColon
+Cpp11BracedListStyle: true
+Standard: Cpp11
+UseTab: Never
+IndentWidth: 2
