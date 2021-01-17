@@ -6,7 +6,10 @@ The following imports will be used throughout:
 
 ```{python}
 import fwdpy11
+import fp11recipes
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 ```
+
+The `fp11recipes` is a small Python module includes with the [source code](https://github.com/ForwardSimulation/fwdpy11_recipes) for this book.
