@@ -4,3 +4,5 @@ key-imports
 distributions-of-effect-sizes
 genetic-maps-and-recombination
 demographic-models-soft-selection-and-discrete-demes
+extending-fwdpy11-with-c
+building-with-cmake
