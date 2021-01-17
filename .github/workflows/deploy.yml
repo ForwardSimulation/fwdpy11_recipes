@@ -72,6 +72,19 @@ jobs:
           python -c "import fwdpy11; print(fwdpy11.__version__)"
           python -m fwdpy11 --help
 
+      - name: Build C++ components of fp11recipes
+        working-directory: fp11recipes
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          make -j 4
+          mv *.so ..
+
+      - name: Test that C++ module is discoverable
+        run: |
+          python -c "import fp11recipes.freqtrackercpp"
+
       - name: Install R dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
