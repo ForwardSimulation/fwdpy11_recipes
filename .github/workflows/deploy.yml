@@ -1,6 +1,7 @@
-name: Build pull requests
+name: Build and deploy
 
 on:
+  pull_request:
   push:
     branches: [main]
 
@@ -82,6 +83,7 @@ jobs:
           R_LIBS_USER=~/.local/Rlibs make
 
       - name: Upload artifacts
+        if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v1
         with:
           name: book_output
@@ -90,6 +92,7 @@ jobs:
   deploy:
     name: deploy
     needs: bookdown
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-20.04
     defaults:
       run:
