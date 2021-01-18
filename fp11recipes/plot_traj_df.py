@@ -1,3 +1,7 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+
+
 def plot_traj_df(
     df: pd.DataFrame, *, minlen: int, selected_alpha=1.0, neutral_alpha=1.0
 ) -> None:
