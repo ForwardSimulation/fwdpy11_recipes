@@ -1,3 +1,4 @@
+jupyter-book
 attrs
 numpy
 pandas

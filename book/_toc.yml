@@ -1,0 +1,32 @@
+# Table of content
+# Learn more at https://jupyterbook.org/customize/toc.html
+#
+
+- file: preface
+
+- part: Introduction
+  chapters:
+  - file: introduction
+
+- part: Setting up the genetics
+  chapters:
+  - file: des
+  - file: recombination
+
+- part: Demography
+  chapters:
+  - file: discretedemography
+
+- part: Processing simulations
+  chapters:
+  - file: timeseries
+    sections:
+      - file: timeseries/pyfreqtracker
+
+- part: Extending fwdpy11 with C++
+  chapters:
+  - file: extendingwithcpp
+  - file: extendingwithcpp/timeseries
+    sections:
+      - file: extendingwithcpp/cppfreqtracker
+  - file: extendingwithcpp/cmake

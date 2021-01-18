@@ -1,3 +1,9 @@
+import typing
+
+import numpy as np
+import pandas as pd
+
+
 def traj2df(trajectories: typing.Dict, N: int) -> pd.DataFrame:
     dfs = []
     for key, value in trajectories.items():

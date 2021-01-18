@@ -1,6 +1,5 @@
 cmake
 g++-9
-r-base
 libgsl-dev
 cmake
 pandoc
