@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Analyzing populations during a simulation | fwdpy11 recipes</title>
+  <meta name="description" content="6 Analyzing populations during a simulation | fwdpy11 recipes" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Analyzing populations during a simulation | fwdpy11 recipes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Analyzing populations during a simulation | fwdpy11 recipes" />
+  
+  
+  
+
+<meta name="author" content="Kevin R Thornton" />
+
+
+<meta name="date" content="2021-01-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="demographic-models-soft-selection-and-discrete-demes.html"/>
+<link rel="next" href="extending-fwdpy11-with-c.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#key-imports"><i class="fa fa-check"></i><b>2.1</b> Key imports</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="distributions-of-effect-sizes.html"><a href="distributions-of-effect-sizes.html"><i class="fa fa-check"></i><b>3</b> Distributions of effect sizes</a></li>
+<li class="chapter" data-level="4" data-path="genetic-maps-and-recombination.html"><a href="genetic-maps-and-recombination.html"><i class="fa fa-check"></i><b>4</b> Genetic maps and recombination</a></li>
+<li class="chapter" data-level="5" data-path="demographic-models-soft-selection-and-discrete-demes.html"><a href="demographic-models-soft-selection-and-discrete-demes.html"><i class="fa fa-check"></i><b>5</b> Demographic models (soft selection and discrete demes)</a></li>
+<li class="chapter" data-level="6" data-path="timeseries.html"><a href="timeseries.html"><i class="fa fa-check"></i><b>6</b> Analyzing populations during a simulation</a><ul>
+<li class="chapter" data-level="6.1" data-path="timeseries.html"><a href="timeseries.html#freqtrackpy"><i class="fa fa-check"></i><b>6.1</b> Tracking mutations over time</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="timeseries.html"><a href="timeseries.html#converting-trajectories-to-data-frames"><i class="fa fa-check"></i><b>6.1.1</b> Converting trajectories to data frames</a></li>
+<li class="chapter" data-level="6.1.2" data-path="timeseries.html"><a href="timeseries.html#plotting-the-trajectories"><i class="fa fa-check"></i><b>6.1.2</b> Plotting the trajectories</a></li>
+<li class="chapter" data-level="6.1.3" data-path="timeseries.html"><a href="timeseries.html#tracking-the-frequencies-of-neutral-mutations"><i class="fa fa-check"></i><b>6.1.3</b> Tracking the frequencies of neutral mutations</a></li>
+<li class="chapter" data-level="6.1.4" data-path="timeseries.html"><a href="timeseries.html#other-considerations"><i class="fa fa-check"></i><b>6.1.4</b> Other considerations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="extending-fwdpy11-with-c.html"><a href="extending-fwdpy11-with-c.html"><i class="fa fa-check"></i><b>7</b> Extending fwdpy11 with C++</a><ul>
+<li class="chapter" data-level="7.1" data-path="extending-fwdpy11-with-c.html"><a href="extending-fwdpy11-with-c.html#freqtrackcpp"><i class="fa fa-check"></i><b>7.1</b> Analyzing population during a simulation</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="extending-fwdpy11-with-c.html"><a href="extending-fwdpy11-with-c.html#tracking-mutations-over-time"><i class="fa fa-check"></i><b>7.1.1</b> Tracking mutations over time</a></li>
+<li class="chapter" data-level="7.1.2" data-path="extending-fwdpy11-with-c.html"><a href="extending-fwdpy11-with-c.html#the-c-code"><i class="fa fa-check"></i><b>7.1.2</b> The C++ code</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="extending-fwdpy11-with-c.html"><a href="extending-fwdpy11-with-c.html#building-with-cmake"><i class="fa fa-check"></i><b>7.2</b> Building with cmake</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">fwdpy11 recipes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="timeseries" class="section level1">
+<h1><span class="header-section-number">6</span> Analyzing populations during a simulation</h1>
+<div id="freqtrackpy" class="section level2">
+<h2><span class="header-section-number">6.1</span> Tracking mutations over time</h2>
+<div class="center">
+<div class="lavenderbox">
+<p>This section makes use of keyword-only arguments to <code>fwdpy11.evolvets</code>.
+Many of those arguments are somewhat experimental in nature.</p>
+</div>
+</div>
+<p>This recipe covers tracking the frequencies of all mutations over time during a simulation using a time series recorder.
+Such tracking requires care, as it is not a common use case.
+Internally, <code>fwdpy11</code> doesn’t really care about how often each mutation is present in the population.
+Usually, the simulation only needs to know if a mutation was removed by simplification, or remains somewhere in the ancestry of the population.
+Therefore, to track frequencies, we need to work a little harder.</p>
+<p>The following listing shows how we will track frequencies.
+The key elements are:</p>
+<ul>
+<li>We initialize instances of the recorder with a “burn-in” time.
+We do not do anything until the population’s generation is greater than that value.
+This check allows us to more quickly simulate to equilibrium, which we’ll explain in more detail below.</li>
+<li>We record trajectories in a Python dictionary.
+The key will be tuples of <code>(origin time, position, effect size)</code>.
+The value will be the count of the mutation each generation.</li>
+<li>We take special care to not record the count of a fixation over and over again.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="at">@attr.s</span>(auto_attribs<span class="op">=</span><span class="va">True</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">class</span> PyFreqTracker(<span class="bu">object</span>):</a>
+<a class="sourceLine" id="cb2-3" title="3">    burnin_time: <span class="bu">int</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    trajectories: typing.Dict <span class="op">=</span> attr.ib(default<span class="op">=</span>attr.Factory(<span class="bu">dict</span>))</a>
+<a class="sourceLine" id="cb2-5" title="5"></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="kw">def</span> <span class="fu">__call__</span>(</a>
+<a class="sourceLine" id="cb2-7" title="7">        <span class="va">self</span>, pop: fwdpy11.DiploidPopulation, sampler: fwdpy11.SampleRecorder</a>
+<a class="sourceLine" id="cb2-8" title="8">    ) <span class="op">-&gt;</span> <span class="va">None</span>:</a>
+<a class="sourceLine" id="cb2-9" title="9">        <span class="cf">if</span> pop.generation <span class="op">&gt;</span> <span class="va">self</span>.burnin_time:</a>
+<a class="sourceLine" id="cb2-10" title="10">            <span class="cf">for</span> c, m <span class="kw">in</span> <span class="bu">zip</span>(pop.mcounts, pop.mutations):</a>
+<a class="sourceLine" id="cb2-11" title="11">                <span class="cf">if</span> c <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> c <span class="op">&lt;=</span> <span class="dv">2</span> <span class="op">*</span> pop.N:</a>
+<a class="sourceLine" id="cb2-12" title="12">                    k <span class="op">=</span> (m.g, m.pos, m.s)</a>
+<a class="sourceLine" id="cb2-13" title="13">                    <span class="cf">if</span> k <span class="kw">in</span> <span class="va">self</span>.trajectories:</a>
+<a class="sourceLine" id="cb2-14" title="14">                        <span class="co"># Make sure that we only record a fixation once.</span></a>
+<a class="sourceLine" id="cb2-15" title="15">                        <span class="cf">if</span> <span class="va">self</span>.trajectories[k][<span class="op">-</span><span class="dv">1</span>] <span class="op">&lt;</span> <span class="dv">2</span> <span class="op">*</span> pop.N:</a>
+<a class="sourceLine" id="cb2-16" title="16">                            <span class="va">self</span>.trajectories[k].append(c)</a>
+<a class="sourceLine" id="cb2-17" title="17">                    <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb2-18" title="18">                        <span class="va">self</span>.trajectories[k] <span class="op">=</span> [c]</a></code></pre></div>
+<p>Now, let’s simulate a model of a high rate of recurrent hitch-hiking:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" title="1">pdict <span class="op">=</span> {</a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="st">&quot;nregions&quot;</span>: [],</a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="st">&quot;sregions&quot;</span>: [fwdpy11.ExpS(beg<span class="op">=</span><span class="dv">0</span>, end<span class="op">=</span><span class="dv">1</span>, weight<span class="op">=</span><span class="dv">1</span>, mean<span class="op">=</span><span class="fl">0.2</span>)],</a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="st">&quot;recregions&quot;</span>: [fwdpy11.PoissonInterval(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">1e-2</span>)],</a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="st">&quot;gvalue&quot;</span>: [fwdpy11.Multiplicative(<span class="fl">2.0</span>)],</a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="st">&quot;rates&quot;</span>: (<span class="fl">0.0</span>, <span class="fl">1e-2</span>, <span class="va">None</span>),</a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="st">&quot;simlen&quot;</span>: <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb3-8" title="8">}</a>
+<a class="sourceLine" id="cb3-9" title="9">params <span class="op">=</span> fwdpy11.ModelParams(<span class="op">**</span>pdict)</a>
+<a class="sourceLine" id="cb3-10" title="10">pop <span class="op">=</span> fwdpy11.DiploidPopulation(<span class="dv">100</span>, <span class="fl">1.0</span>)</a>
+<a class="sourceLine" id="cb3-11" title="11">rng <span class="op">=</span> fwdpy11.GSLrng(<span class="dv">42</span>)</a>
+<a class="sourceLine" id="cb3-12" title="12">recorder <span class="op">=</span> PyFreqTracker(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb3-13" title="13">fwdpy11.evolvets(</a>
+<a class="sourceLine" id="cb3-14" title="14">    rng,</a>
+<a class="sourceLine" id="cb3-15" title="15">    pop,</a>
+<a class="sourceLine" id="cb3-16" title="16">    params,</a>
+<a class="sourceLine" id="cb3-17" title="17">    <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb3-18" title="18">    recorder,</a>
+<a class="sourceLine" id="cb3-19" title="19">    track_mutation_counts<span class="op">=</span><span class="va">True</span>,</a>
+<a class="sourceLine" id="cb3-20" title="20">    suppress_table_indexing<span class="op">=</span><span class="va">False</span>,</a>
+<a class="sourceLine" id="cb3-21" title="21">)</a></code></pre></div>
+<p>The arguments to <code>fwdpy11.evolvets</code> need some explanation.
+We simplify every 10 generations.
+Setting <code>track_mutation_counts=True</code> tells the function to obtain mutation counts from diploid genomes every generation.
+Setting <code>suppress_table_indexing=False</code> tells <code>fwdpy11</code> to index the tables after every simplification event.
+In generations when simplification occurs, mutation counts are obtained from trees and not from genomes.</p>
+<div class="center">
+<div class="lavenderbox">
+<p>The current default behavior of <code>fwdpy11.evolvets</code> is to set <code>suppress_table_indexing=False</code>.
+However, future releases will likely set that to <code>True</code>.
+This recipe is written in anticipation of that change.</p>
+</div>
+</div>
+<div id="converting-trajectories-to-data-frames" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Converting trajectories to data frames</h3>
+<p>We can easily do a lot of analysis from <code>recorder.trajectories</code>.
+However, there are good reasons to convert things into common formats for analysis, such as the <a href="https://pandas.pydata.org">pandas</a> data frame:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">def</span> traj2df(trajectories: typing.Dict, N: <span class="bu">int</span>) <span class="op">-&gt;</span> pd.DataFrame:</a>
+<a class="sourceLine" id="cb4-2" title="2">    dfs <span class="op">=</span> []</a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="cf">for</span> key, value <span class="kw">in</span> trajectories.items():</a>
+<a class="sourceLine" id="cb4-4" title="4">        df <span class="op">=</span> pd.DataFrame(</a>
+<a class="sourceLine" id="cb4-5" title="5">            {</a>
+<a class="sourceLine" id="cb4-6" title="6">                <span class="st">&quot;generation&quot;</span>: np.arange(<span class="bu">len</span>(value), dtype<span class="op">=</span>np.uint32) <span class="op">+</span> key[<span class="dv">0</span>],</a>
+<a class="sourceLine" id="cb4-7" title="7">                <span class="st">&quot;frequency&quot;</span>: np.array(value) <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> N),</a>
+<a class="sourceLine" id="cb4-8" title="8">                <span class="st">&quot;origin_time&quot;</span>: [key[<span class="dv">0</span>]] <span class="op">*</span> <span class="bu">len</span>(value),</a>
+<a class="sourceLine" id="cb4-9" title="9">                <span class="st">&quot;position&quot;</span>: [key[<span class="dv">1</span>]] <span class="op">*</span> <span class="bu">len</span>(value),</a>
+<a class="sourceLine" id="cb4-10" title="10">                <span class="st">&quot;effect_size&quot;</span>: [key[<span class="dv">2</span>]] <span class="op">*</span> <span class="bu">len</span>(value),</a>
+<a class="sourceLine" id="cb4-11" title="11">            }</a>
+<a class="sourceLine" id="cb4-12" title="12">        )</a>
+<a class="sourceLine" id="cb4-13" title="13">        dfs.append(df)</a>
+<a class="sourceLine" id="cb4-14" title="14">    <span class="cf">return</span> pd.concat(dfs)</a></code></pre></div>
+</div>
+<div id="plotting-the-trajectories" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> Plotting the trajectories</h3>
+<p>Here is a function to plot all trajectories, eliminating those with sojourn times <span class="math inline">\(&lt; minlen\)</span> generations:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">def</span> plot_traj_df(</a>
+<a class="sourceLine" id="cb5-2" title="2">    df: pd.DataFrame, <span class="op">*</span>, minlen: <span class="bu">int</span>, selected_alpha<span class="op">=</span><span class="fl">1.0</span>, neutral_alpha<span class="op">=</span><span class="fl">1.0</span></a>
+<a class="sourceLine" id="cb5-3" title="3">) <span class="op">-&gt;</span> <span class="va">None</span>:</a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="cf">if</span> minlen <span class="op">&lt;</span> <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb5-5" title="5">        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f&quot;minlen must be non-negative, got </span><span class="sc">{</span>minlen<span class="sc">}</span><span class="ss">&quot;</span>)</a>
+<a class="sourceLine" id="cb5-6" title="6">    plt.figure()</a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="cf">for</span> n, g <span class="kw">in</span> df.groupby([<span class="st">&quot;origin_time&quot;</span>, <span class="st">&quot;position&quot;</span>, <span class="st">&quot;effect_size&quot;</span>]):</a>
+<a class="sourceLine" id="cb5-8" title="8">        <span class="cf">if</span> <span class="bu">len</span>(g.index) <span class="op">&gt;=</span> minlen:</a>
+<a class="sourceLine" id="cb5-9" title="9">            <span class="cf">if</span> g.effect_size[<span class="dv">0</span>] <span class="op">==</span> <span class="fl">0.0</span>:</a>
+<a class="sourceLine" id="cb5-10" title="10">                plt.plot(g.generation, g.frequency, linestyle<span class="op">=</span><span class="st">&quot;--&quot;</span>, alpha<span class="op">=</span>neutral_alpha)</a>
+<a class="sourceLine" id="cb5-11" title="11">            <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb5-12" title="12">                plt.plot(g.generation, g.frequency, alpha<span class="op">=</span>selected_alpha)</a>
+<a class="sourceLine" id="cb5-13" title="13">    plt.xlabel(<span class="st">&quot;Time (generation)&quot;</span>)</a>
+<a class="sourceLine" id="cb5-14" title="14">    plt.ylabel(<span class="st">&quot;Frequency&quot;</span>)</a>
+<a class="sourceLine" id="cb5-15" title="15">    plt.show()</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" title="1">df <span class="op">=</span> traj2df(recorder.trajectories, pop.N)</a>
+<a class="sourceLine" id="cb6-2" title="2">plot_traj_df(df, minlen<span class="op">=</span><span class="dv">10</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:plotpyfreqtrackeroutput"></span>
+<img src="fwdpy11_recipes_files/figure-html/plotpyfreqtrackeroutput-1.png" alt="So many sweeps!"  />
+<p class="caption">
+Figure 6.1: So many sweeps!
+</p>
+</div>
+</div>
+<div id="tracking-the-frequencies-of-neutral-mutations" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> Tracking the frequencies of neutral mutations</h3>
+<p>One generally doesn’t simulate neutral mutations.
+However, certain questions regarding linked selection may force you to do so.
+Neutral mutations <em>do not</em> get added to diploid genomes (in order to save memory), and thus will their counts are not obtained via <code>track_mutation_counts=True</code>.
+The solution is:</p>
+<ul>
+<li>Simplify every generation, so that counts can be obtained from the trees.</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" title="1">pdict <span class="op">=</span> {</a>
+<a class="sourceLine" id="cb7-2" title="2">    <span class="co"># Add a region for neutral mutations:</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="st">&quot;nregions&quot;</span>: [fwdpy11.Region(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)],</a>
+<a class="sourceLine" id="cb7-4" title="4">    <span class="st">&quot;sregions&quot;</span>: [fwdpy11.ExpS(beg<span class="op">=</span><span class="dv">0</span>, end<span class="op">=</span><span class="dv">1</span>, weight<span class="op">=</span><span class="dv">1</span>, mean<span class="op">=</span><span class="fl">0.2</span>)],</a>
+<a class="sourceLine" id="cb7-5" title="5">    <span class="st">&quot;recregions&quot;</span>: [fwdpy11.PoissonInterval(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">1e-2</span>)],</a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="st">&quot;gvalue&quot;</span>: [fwdpy11.Multiplicative(<span class="fl">2.0</span>)],</a>
+<a class="sourceLine" id="cb7-7" title="7">    <span class="co"># Add a mutation rate for neutral mutations:</span></a>
+<a class="sourceLine" id="cb7-8" title="8">    <span class="st">&quot;rates&quot;</span>: (<span class="fl">1e-2</span>, <span class="fl">1e-2</span>, <span class="va">None</span>),</a>
+<a class="sourceLine" id="cb7-9" title="9">    <span class="st">&quot;simlen&quot;</span>: <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb7-10" title="10">}</a>
+<a class="sourceLine" id="cb7-11" title="11">params <span class="op">=</span> fwdpy11.ModelParams(<span class="op">**</span>pdict)</a>
+<a class="sourceLine" id="cb7-12" title="12">pop <span class="op">=</span> fwdpy11.DiploidPopulation(<span class="dv">100</span>, <span class="fl">1.0</span>)</a>
+<a class="sourceLine" id="cb7-13" title="13">rng <span class="op">=</span> fwdpy11.GSLrng(<span class="dv">54321</span>)</a>
+<a class="sourceLine" id="cb7-14" title="14">recorder <span class="op">=</span> PyFreqTracker(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb7-15" title="15">fwdpy11.evolvets(</a>
+<a class="sourceLine" id="cb7-16" title="16">    rng,</a>
+<a class="sourceLine" id="cb7-17" title="17">    pop,</a>
+<a class="sourceLine" id="cb7-18" title="18">    params,</a>
+<a class="sourceLine" id="cb7-19" title="19">    <span class="dv">1</span>,  <span class="co"># Simplify every generation</span></a>
+<a class="sourceLine" id="cb7-20" title="20">    recorder,</a>
+<a class="sourceLine" id="cb7-21" title="21">    suppress_table_indexing<span class="op">=</span><span class="va">False</span>,</a>
+<a class="sourceLine" id="cb7-22" title="22">)</a></code></pre></div>
+<p>Here, we do not need <code>track_mutation_counts=True</code> because simplifying each generation ends up accomplishing the same thing (for neutral and for selected variants).</p>
+<p>Let’s take a look at the plot.
+We will reduce the opacity of selected variants to make the neutral ones pop a bit more:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" title="1">df <span class="op">=</span> traj2df(recorder.trajectories, pop.N)</a>
+<a class="sourceLine" id="cb8-2" title="2">plot_traj_df(df, minlen<span class="op">=</span><span class="dv">10</span>, selected_alpha<span class="op">=</span><span class="fl">0.10</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="fwdpy11_recipes_files/figure-html/unnamed-chunk-3-1.png" alt="Hitch-hiking! Neutral mutation trajectories are dashed lines.  The selected variant tajectories are shown with reduced opacity."  />
+<p class="caption">
+Figure 6.2: Hitch-hiking! Neutral mutation trajectories are dashed lines. The selected variant tajectories are shown with reduced opacity.
+</p>
+</div>
+</div>
+<div id="other-considerations" class="section level3">
+<h3><span class="header-section-number">6.1.4</span> Other considerations</h3>
+<p>This recipe needs adjustment for the following cases:</p>
+<ul>
+<li>Tracking mutation frequencies with respect to deme.</li>
+<li>Tracking mutation frequencies in demes that change size.</li>
+</ul>
+<p>While this tracker is quite simple to write, performance may be an issue for very large simulations.
+To further improve performance, see <a href="extending-fwdpy11-with-c.html#freqtrackcpp">7.1</a>.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="demographic-models-soft-selection-and-discrete-demes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="extending-fwdpy11-with-c.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
