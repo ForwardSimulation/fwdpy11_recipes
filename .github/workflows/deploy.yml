@@ -35,7 +35,7 @@ jobs:
         with:
           path: |
             ~/.local
-          key: ${{ matrix.python }}-${{ hashFiles('requirements/install.R') }}
+          key: ${{ matrix.python }}-${{ hashFiles('requirements/requirements.txt') }}
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
@@ -85,15 +85,14 @@ jobs:
         run: |
           python -c "import fp11recipes.freqtrackercpp"
 
-      - name: Install R dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          mkdir ~/.local/Rlibs
-          R --no-save < requirements/install.R
-
       - name: Build the book
         run: |
-          R_LIBS_USER=~/.local/Rlibs make
+          make
+
+      - name: Move built HTML book
+        if: github.ref == 'refs/heads/main'
+        run: |
+          mv _build/html book_output
 
       - name: Upload artifacts
         if: github.ref == 'refs/heads/main'
