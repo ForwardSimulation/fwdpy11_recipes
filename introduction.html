@@ -1,270 +1,386 @@
+
 <!DOCTYPE html>
-<html lang="" xml:lang="">
-<head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Introduction | fwdpy11 recipes</title>
-  <meta name="description" content="2 Introduction | fwdpy11 recipes" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Background information &#8212; fwdpy11_recipes</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
-  <meta property="og:title" content="2 Introduction | fwdpy11 recipes" />
-  <meta property="og:type" content="book" />
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/thebelab-helper.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Distributions of effect sizes" href="des.html" />
+    <link rel="prev" title="Preface" href="preface.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
   
   
+  <h1 class="site-logo" id="site-title">fwdpy11_recipes</h1>
   
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Introduction | fwdpy11 recipes" />
-  
-  
-  
-
-<meta name="author" content="Kevin R Thornton" />
-
-
-<meta name="date" content="2021-01-18" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="index.html"/>
-<link rel="next" href="distributions-of-effect-sizes.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-
-
-
-<style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
-</head>
-
-<body>
-
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
-<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
-<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#modern-python"><i class="fa fa-check"></i><b>2.1</b> Modern Python</a></li>
-<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#key-imports"><i class="fa fa-check"></i><b>2.2</b> Key imports</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="distributions-of-effect-sizes.html"><a href="distributions-of-effect-sizes.html"><i class="fa fa-check"></i><b>3</b> Distributions of effect sizes</a></li>
-<li class="chapter" data-level="4" data-path="genetic-maps-and-recombination.html"><a href="genetic-maps-and-recombination.html"><i class="fa fa-check"></i><b>4</b> Genetic maps and recombination</a></li>
-<li class="chapter" data-level="5" data-path="demographic-models-soft-selection-and-discrete-demes.html"><a href="demographic-models-soft-selection-and-discrete-demes.html"><i class="fa fa-check"></i><b>5</b> Demographic models (soft selection and discrete demes)</a></li>
-<li class="chapter" data-level="6" data-path="timeseries.html"><a href="timeseries.html"><i class="fa fa-check"></i><b>6</b> Analyzing populations during a simulation</a><ul>
-<li class="chapter" data-level="6.1" data-path="timeseries.html"><a href="timeseries.html#freqtrackpy"><i class="fa fa-check"></i><b>6.1</b> Tracking mutations over time</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="timeseries.html"><a href="timeseries.html#converting-trajectories-to-data-frames"><i class="fa fa-check"></i><b>6.1.1</b> Converting trajectories to data frames</a></li>
-<li class="chapter" data-level="6.1.2" data-path="timeseries.html"><a href="timeseries.html#plotting-the-trajectories"><i class="fa fa-check"></i><b>6.1.2</b> Plotting the trajectories</a></li>
-<li class="chapter" data-level="6.1.3" data-path="timeseries.html"><a href="timeseries.html#tracking-the-frequencies-of-neutral-mutations"><i class="fa fa-check"></i><b>6.1.3</b> Tracking the frequencies of neutral mutations</a></li>
-<li class="chapter" data-level="6.1.4" data-path="timeseries.html"><a href="timeseries.html#other-considerations"><i class="fa fa-check"></i><b>6.1.4</b> Other considerations</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="extending-fwdpy11-with-c.html"><a href="extending-fwdpy11-with-c.html"><i class="fa fa-check"></i><b>7</b> Extending fwdpy11 with C++</a><ul>
-<li class="chapter" data-level="7.1" data-path="extending-fwdpy11-with-c.html"><a href="extending-fwdpy11-with-c.html#freqtrackcpp"><i class="fa fa-check"></i><b>7.1</b> Analyzing population during a simulation</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="extending-fwdpy11-with-c.html"><a href="extending-fwdpy11-with-c.html#tracking-mutations-over-time"><i class="fa fa-check"></i><b>7.1.1</b> Tracking mutations over time</a></li>
-<li class="chapter" data-level="7.1.2" data-path="extending-fwdpy11-with-c.html"><a href="extending-fwdpy11-with-c.html#the-c-code"><i class="fa fa-check"></i><b>7.1.2</b> The C++ code</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="extending-fwdpy11-with-c.html"><a href="extending-fwdpy11-with-c.html#building-with-cmake"><i class="fa fa-check"></i><b>7.2</b> Building with cmake</a></li>
-</ul></li>
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Preface
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Background information
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Setting up the genetics
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="des.html">
+   Distributions of effect sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="recombination.html">
+   Genetic maps and recombination
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Demography
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="discretedemography.html">
+   Demographic models (soft selection and discrete demes)
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Processing simulations
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="timeseries.html">
+   Analyzing populations during a simulation
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="timeseries/pyfreqtracker.html">
+     Tracking mutations over time
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Extending fwdpy11 with C++
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="extendingwithcpp.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="extendingwithcpp/timeseries.html">
+   Analyzing population during a simulation (using C++)
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="extendingwithcpp/cppfreqtracker.html">
+     Tracking mutations over time using C++
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="extendingwithcpp/cmake.html">
+   Building with cmake
+  </a>
+ </li>
 </ul>
 
-      </nav>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/introduction.rst"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ForwardSimulation/fwdpy11_recipes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ForwardSimulation/fwdpy11_recipes/issues/new?title=Issue%20on%20page%20%2Fintroduction.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">fwdpy11 recipes</a>
-          </h1>
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
         </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modern-python">
+   Modern Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#key-imports">
+   Key imports
+  </a>
+ </li>
+</ul>
 
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">2</span> Introduction</h1>
-<div id="modern-python" class="section level2">
-<h2><span class="header-section-number">2.1</span> Modern Python</h2>
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="background-information">
+<h1>Background information<a class="headerlink" href="#background-information" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="modern-python">
+<h2>Modern Python<a class="headerlink" href="#modern-python" title="Permalink to this headline">¶</a></h2>
 <p>The examples in this book use several modern Python features:</p>
-<ul>
-<li>Functions are defined with <a href="https://docs.python.org/3/library/typing.html">type hints</a>.</li>
-<li>Class definitions usually use <a href="https://www.attrs.org">attrs</a>.</li>
+<ul class="simple">
+<li><p>Functions are defined with <a class="reference external" href="https://docs.python.org/3/library/typing.html">type hints</a>.</p></li>
+<li><p>Class definitions usually use <a class="reference external" href="https://www.attrs.org">attrs</a>.</p></li>
 </ul>
 </div>
-<div id="key-imports" class="section level2">
-<h2><span class="header-section-number">2.2</span> Key imports</h2>
-<p>The following imports will be used throughout:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python numberLines"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="im">import</span> typing</a>
-<a class="sourceLine" id="cb1-2" title="2"></a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="im">import</span> numpy <span class="im">as</span> np</a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="im">import</span> pandas <span class="im">as</span> pd</a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="im">import</span> seaborn <span class="im">as</span> sns</a>
-<a class="sourceLine" id="cb1-7" title="7"></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="im">import</span> attr</a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="im">import</span> fp11recipes</a>
-<a class="sourceLine" id="cb1-10" title="10"><span class="im">import</span> fwdpy11</a></code></pre></div>
-<p>The <code>fp11recipes</code> is a small Python module included with the <a href="https://github.com/ForwardSimulation/fwdpy11_recipes">source code</a> for this book.</p>
+<div class="section" id="key-imports">
+<h2>Key imports<a class="headerlink" href="#key-imports" title="Permalink to this headline">¶</a></h2>
+<p>The following imports will be used throughout the book:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typing</span>
 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">import</span> <span class="nn">attr</span>
+<span class="kn">import</span> <span class="nn">fp11recipes</span>
+<span class="kn">import</span> <span class="nn">fwdpy11</span>
+</pre></div>
 </div>
 </div>
-            </section>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>The <cite>fp11recipes</cite> is a small Python module included with the <a class="reference external" href="https://github.com/ForwardSimulation/fwdpy11_recipes">source code</a> for this book.</p>
+</div>
+</div>
 
-          </div>
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
         </div>
-      </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="distributions-of-effect-sizes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
-  </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="preface.html" title="previous page">Preface</a>
+    <a class='right-next' id="next-link" href="des.html" title="next page">Distributions of effect sizes</a>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-</body>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Kevin Thornton<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
 
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
 </html>

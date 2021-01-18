@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tracking mutations over time using C++ &#8212; fwdpy11_recipes</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Building with cmake" href="cmake.html" />
+    <link rel="prev" title="Analyzing population during a simulation (using C++)" href="timeseries.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">fwdpy11_recipes</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../preface.html">
+   Preface
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction.html">
+   Background information
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Setting up the genetics
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../des.html">
+   Distributions of effect sizes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recombination.html">
+   Genetic maps and recombination
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Demography
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../discretedemography.html">
+   Demographic models (soft selection and discrete demes)
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Processing simulations
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../timeseries.html">
+   Analyzing populations during a simulation
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../timeseries/pyfreqtracker.html">
+     Tracking mutations over time
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Extending fwdpy11 with C++
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../extendingwithcpp.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="timeseries.html">
+   Analyzing population during a simulation (using C++)
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Tracking mutations over time using C++
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmake.html">
+   Building with cmake
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/extendingwithcpp/cppfreqtracker.rst"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ForwardSimulation/fwdpy11_recipes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ForwardSimulation/fwdpy11_recipes/issues/new?title=Issue%20on%20page%20%2Fextendingwithcpp/cppfreqtracker.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-the-tracker">
+   Running the tracker
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-c-code">
+   The C++ code
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p>This section revisits concepts from Chapter <a class="reference internal" href="../timeseries.html#timeseries"><span class="std std-ref">Analyzing populations during a simulation</span></a>.</p>
+<div class="section" id="tracking-mutations-over-time-using-c">
+<span id="freqtrackcpp"></span><h1>Tracking mutations over time using C++<a class="headerlink" href="#tracking-mutations-over-time-using-c" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="running-the-tracker">
+<h2>Running the tracker<a class="headerlink" href="#running-the-tracker" title="Permalink to this headline">¶</a></h2>
+<p>This recipe revisits the [Python frequency tracker](#freqtrackpy) using a tracker written in C++.
+The tracker’s code is shown below.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fwdpy11</span>
+<span class="kn">from</span> <span class="nn">fp11recipes.freqtrackercpp</span> <span class="kn">import</span> <span class="n">FreqTracker</span>
+
+<span class="n">pdict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;nregions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;sregions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">fwdpy11</span><span class="o">.</span><span class="n">ExpS</span><span class="p">(</span><span class="n">beg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)],</span>
+    <span class="s2">&quot;recregions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">fwdpy11</span><span class="o">.</span><span class="n">PoissonInterval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">)],</span>
+    <span class="s2">&quot;gvalue&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">fwdpy11</span><span class="o">.</span><span class="n">Multiplicative</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)],</span>
+    <span class="s2">&quot;rates&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+    <span class="s2">&quot;simlen&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">fwdpy11</span><span class="o">.</span><span class="n">ModelParams</span><span class="p">(</span><span class="o">**</span><span class="n">pdict</span><span class="p">)</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">fwdpy11</span><span class="o">.</span><span class="n">DiploidPopulation</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">fwdpy11</span><span class="o">.</span><span class="n">GSLrng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">recorder</span> <span class="o">=</span> <span class="n">FreqTracker</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">fwdpy11</span><span class="o">.</span><span class="n">evolvets</span><span class="p">(</span>
+    <span class="n">rng</span><span class="p">,</span>
+    <span class="n">pop</span><span class="p">,</span>
+    <span class="n">params</span><span class="p">,</span>
+    <span class="mi">10</span><span class="p">,</span>
+    <span class="n">recorder</span><span class="p">,</span>
+    <span class="n">track_mutation_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">suppress_table_indexing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>We will reuse code from the previous recipe to convert the output to a data frame and plot:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fp11recipes</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">fp11recipes</span><span class="o">.</span><span class="n">traj2df</span><span class="p">(</span><span class="n">recorder</span><span class="o">.</span><span class="n">trajectories</span><span class="p">,</span> <span class="n">pop</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+<span class="n">fp11recipes</span><span class="o">.</span><span class="n">plot_traj_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">minlen</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/cppfreqtracker_1_0.png" src="../_images/cppfreqtracker_1_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="the-c-code">
+<h2>The C++ code<a class="headerlink" href="#the-c-code" title="Permalink to this headline">¶</a></h2>
+<p>The code is relatively straightforward C++.
+The main difference from the Python version is that we use <cite>unordered_map</cite> as our associative container.
+C++ does not have hashing functions for tuples, meaning that we have to adjust our scheme a bit.
+Here, we use nested associative containers.
+The outer container hashes the mutations’ origin times.
+The inner container hashes position.</p>
+<p>We manually define a property to convert the data to a <cite>dict</cite>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#include &lt;cstdint&gt;</span>
+<span class="c1">#include &lt;map&gt;</span>
+<span class="c1">#include &lt;tuple&gt;</span>
+<span class="c1">#include &lt;unordered_map&gt;</span>
+<span class="c1">#include &lt;vector&gt;</span>
+
+<span class="c1">#include &lt;fwdpy11/evolvets/SampleRecorder.hpp&gt;</span>
+<span class="c1">#include &lt;fwdpy11/types/DiploidPopulation.hpp&gt;</span>
+<span class="c1">#include &lt;pybind11/functional.h&gt;</span>
+<span class="c1">#include &lt;pybind11/pybind11.h&gt;</span>
+<span class="c1">#include &lt;pybind11/stl.h&gt;</span>
+
+<span class="n">namespace</span> <span class="n">py</span> <span class="o">=</span> <span class="n">pybind11</span><span class="p">;</span>
+
+<span class="n">struct</span> <span class="n">FreqTracker</span>
+<span class="p">{</span>
+  <span class="o">//</span> <span class="n">Origin</span> <span class="n">time</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">effect</span> <span class="n">size</span>
+  <span class="n">using</span> <span class="n">key_type</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="nb">tuple</span><span class="o">&lt;</span><span class="n">std</span><span class="p">::</span><span class="n">uint32_t</span><span class="p">,</span> <span class="n">double</span><span class="p">,</span> <span class="n">double</span><span class="o">&gt;</span><span class="p">;</span>
+
+  <span class="n">using</span> <span class="n">trajectory</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="p">::</span><span class="n">uint32_t</span><span class="o">&gt;</span><span class="p">;</span>
+
+  <span class="o">//</span> <span class="n">We</span> <span class="n">record</span> <span class="n">trajectories</span> <span class="n">by</span> <span class="n">nesting</span> <span class="n">hashed</span> <span class="n">associative</span>
+  <span class="o">//</span> <span class="n">containers</span><span class="o">.</span> <span class="n">The</span> <span class="n">outer</span> <span class="nb">hash</span> <span class="ow">is</span> <span class="n">on</span> <span class="n">origin</span> <span class="n">time</span><span class="o">.</span>  <span class="n">The</span> <span class="n">inner</span>
+  <span class="o">//</span> <span class="ow">is</span> <span class="n">on</span> <span class="n">position</span><span class="o">.</span> <span class="n">Finally</span><span class="p">,</span> <span class="n">the</span> <span class="n">pair</span> <span class="ow">is</span> <span class="n">effect</span> <span class="n">size</span> <span class="o">+</span> <span class="n">the</span>
+  <span class="o">//</span> <span class="n">frequency</span> <span class="n">trajectory</span><span class="o">.</span>
+  <span class="n">using</span> <span class="n">map_type</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="n">unordered_map</span><span class="o">&lt;</span>
+    <span class="n">std</span><span class="p">::</span><span class="n">uint32_t</span><span class="p">,</span>
+    <span class="n">std</span><span class="p">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">double</span><span class="p">,</span> <span class="n">std</span><span class="p">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">double</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">&gt;&gt;&gt;</span><span class="p">;</span>
+
+  <span class="n">map_type</span> <span class="n">trajectories</span><span class="p">;</span>
+  <span class="n">std</span><span class="p">::</span><span class="n">uint32_t</span> <span class="n">burnin_time</span><span class="p">;</span>
+
+  <span class="n">FreqTracker</span><span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="n">uint32_t</span> <span class="n">burnin</span><span class="p">)</span> <span class="p">:</span> <span class="n">trajectories</span><span class="p">{},</span> <span class="n">burnin_time</span><span class="p">{</span><span class="n">burnin</span><span class="p">}</span> <span class="p">{}</span>
+
+  <span class="n">inline</span> <span class="n">void</span> <span class="n">operator</span><span class="p">()(</span><span class="n">const</span> <span class="n">fwdpy11</span><span class="p">::</span><span class="n">DiploidPopulation</span><span class="o">&amp;</span> <span class="n">pop</span><span class="p">,</span>
+                         <span class="n">fwdpy11</span><span class="p">::</span><span class="n">SampleRecorder</span><span class="o">&amp;</span> <span class="o">/*</span><span class="n">unused</span><span class="o">*/</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">generation</span> <span class="o">&gt;</span> <span class="n">burnin_time</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">pop</span><span class="o">.</span><span class="n">mcounts</span><span class="o">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">mcounts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">pop</span><span class="o">.</span><span class="n">mcounts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pop</span><span class="o">.</span><span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">auto</span> <span class="n">origin</span> <span class="o">=</span> <span class="n">pop</span><span class="o">.</span><span class="n">mutations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">g</span><span class="p">;</span>
+          <span class="n">auto</span> <span class="n">origin_itr</span> <span class="o">=</span> <span class="n">trajectories</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">origin</span><span class="p">);</span>
+
+          <span class="k">if</span> <span class="p">(</span><span class="n">origin_itr</span> <span class="o">==</span> <span class="n">end</span><span class="p">(</span><span class="n">trajectories</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">trajectories</span><span class="p">[</span><span class="n">origin</span><span class="p">][</span><span class="n">pop</span><span class="o">.</span><span class="n">mutations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span>
+              <span class="n">std</span><span class="p">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">mutations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">{</span><span class="n">pop</span><span class="o">.</span><span class="n">mcounts</span><span class="p">[</span><span class="n">i</span><span class="p">]});</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">auto</span> <span class="n">pos_itr</span> <span class="o">=</span> <span class="n">origin_itr</span><span class="o">-&gt;</span><span class="n">second</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">mutations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">pos_itr</span> <span class="o">==</span> <span class="n">end</span><span class="p">(</span><span class="n">origin_itr</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">))</span> <span class="p">{</span>
+              <span class="n">origin_itr</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">[</span><span class="n">pop</span><span class="o">.</span><span class="n">mutations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span>
+                <span class="n">std</span><span class="p">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">mutations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">{</span><span class="n">pop</span><span class="o">.</span><span class="n">mcounts</span><span class="p">[</span><span class="n">i</span><span class="p">]});</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+              <span class="k">if</span> <span class="p">(</span><span class="n">pos_itr</span><span class="o">-&gt;</span><span class="n">second</span><span class="o">.</span><span class="n">second</span><span class="o">.</span><span class="n">back</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pop</span><span class="o">.</span><span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">pos_itr</span><span class="o">-&gt;</span><span class="n">second</span><span class="o">.</span><span class="n">second</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">mcounts</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="o">//</span> <span class="n">Make</span> <span class="n">a</span> <span class="n">copy</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data</span> <span class="n">that</span> <span class="n">Python</span> <span class="n">will</span> <span class="n">see</span>
+  <span class="o">//</span> <span class="k">as</span> <span class="n">a</span> <span class="nb">dict</span><span class="o">.</span>
+  <span class="o">//</span> <span class="n">While</span> <span class="n">we</span> <span class="n">could</span> <span class="n">rely</span> <span class="n">on</span> <span class="n">pybind11</span> <span class="n">to</span> <span class="n">auto</span><span class="o">-</span><span class="n">convert</span>
+  <span class="o">//</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">C</span><span class="o">++</span> <span class="nb">map</span> <span class="n">to</span> <span class="n">a</span> <span class="n">Python</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">doing</span> <span class="n">so</span>
+  <span class="o">//</span> <span class="n">would</span> <span class="n">give</span> <span class="mi">3</span> <span class="n">total</span> <span class="n">copies</span> <span class="ow">in</span> <span class="n">memory</span> <span class="n">due</span> <span class="n">to</span>
+  <span class="o">//</span> <span class="n">temporaries</span><span class="o">.</span>  <span class="n">So</span> <span class="n">instead</span><span class="p">,</span> <span class="n">we</span> <span class="n">go</span> <span class="n">straight</span>
+  <span class="o">//</span> <span class="n">to</span> <span class="n">a</span> <span class="nb">dict</span> <span class="n">using</span> <span class="n">pybind11</span><span class="s1">&#39;s API.</span>
+  <span class="n">py</span><span class="p">::</span><span class="nb">dict</span> <span class="n">get_trajectories</span><span class="p">()</span> <span class="n">const</span>
+  <span class="p">{</span>
+    <span class="n">py</span><span class="p">::</span><span class="nb">dict</span> <span class="n">rv</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">auto</span><span class="o">&amp;&amp;</span> <span class="n">origin</span> <span class="p">:</span> <span class="n">trajectories</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">auto</span><span class="o">&amp;&amp;</span> <span class="n">position</span> <span class="p">:</span> <span class="n">origin</span><span class="o">.</span><span class="n">second</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">Make</span> <span class="n">a</span> <span class="n">Python</span> <span class="nb">tuple</span>
+        <span class="n">auto</span> <span class="n">key</span> <span class="o">=</span>
+          <span class="n">py</span><span class="p">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">origin</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">position</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">position</span><span class="o">.</span><span class="n">second</span><span class="o">.</span><span class="n">first</span><span class="p">);</span>
+        <span class="o">//</span> <span class="n">Rely</span> <span class="n">on</span> <span class="n">auto</span><span class="o">-</span><span class="n">conversion</span> <span class="n">of</span> <span class="n">c</span><span class="o">++</span> <span class="n">vector</span>
+        <span class="o">//</span> <span class="n">to</span> <span class="n">Python</span> <span class="nb">list</span><span class="p">,</span> <span class="n">via</span> <span class="n">pybind11</span><span class="o">/</span><span class="n">stl</span><span class="o">.</span><span class="n">h</span> <span class="n">included</span> <span class="n">above</span><span class="o">.</span>
+        <span class="n">rv</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">position</span><span class="o">.</span><span class="n">second</span><span class="o">.</span><span class="n">second</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rv</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">PYBIND11_MODULE</span><span class="p">(</span><span class="n">freqtrackercpp</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">py</span><span class="p">::</span><span class="n">class_</span><span class="o">&lt;</span><span class="n">FreqTracker</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s2">&quot;FreqTracker&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">def</span><span class="p">(</span><span class="n">py</span><span class="p">::</span><span class="n">init</span><span class="o">&lt;</span><span class="n">std</span><span class="p">::</span><span class="n">uint32_t</span><span class="o">&gt;</span><span class="p">(),</span>
+         <span class="n">py</span><span class="p">::</span><span class="n">arg</span><span class="p">(</span><span class="s2">&quot;burnin_time&quot;</span><span class="p">))</span> <span class="o">//</span> <span class="n">This</span> <span class="ow">is</span> <span class="fm">__init__</span>
+    <span class="o">.</span><span class="n">def</span><span class="p">(</span><span class="s2">&quot;__call__&quot;</span><span class="p">,</span>
+         <span class="o">&amp;</span><span class="n">FreqTracker</span><span class="p">::</span><span class="n">operator</span><span class="p">())</span> <span class="o">//</span> <span class="n">This</span> <span class="n">makes</span> <span class="n">it</span> <span class="n">a</span> <span class="n">valid</span>
+                                   <span class="o">//</span> <span class="n">Python</span> <span class="n">callable</span>
+    <span class="o">.</span><span class="n">def_property_readonly</span><span class="p">(</span><span class="s2">&quot;trajectories&quot;</span><span class="p">,</span>
+                           <span class="o">&amp;</span><span class="n">FreqTracker</span><span class="p">::</span><span class="n">get_trajectories</span><span class="p">);</span> <span class="o">//</span> <span class="n">Get</span> <span class="n">the</span> <span class="n">data</span> <span class="k">as</span> <span class="n">a</span>
+                                                            <span class="o">//</span> <span class="nb">dict</span> <span class="ow">in</span> <span class="n">Python</span><span class="o">.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./extendingwithcpp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="timeseries.html" title="previous page">Analyzing population during a simulation (using C++)</a>
+    <a class='right-next' id="next-link" href="cmake.html" title="next page">Building with cmake</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Kevin Thornton<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

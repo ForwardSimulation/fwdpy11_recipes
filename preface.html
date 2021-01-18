@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Analyzing populations during a simulation &#8212; fwdpy11_recipes</title>
+    <title>Preface &#8212; fwdpy11_recipes</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -59,8 +59,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tracking mutations over time" href="timeseries/pyfreqtracker.html" />
-    <link rel="prev" title="Demographic models (soft selection and discrete demes)" href="discretedemography.html" />
+    <link rel="next" title="Background information" href="introduction.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -89,8 +88,8 @@
 </form>
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="#">
    Preface
   </a>
  </li>
@@ -141,9 +140,9 @@
   Processing simulations
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active collapsible-parent">
-  <a class="current reference internal" href="#">
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="timeseries.html">
    Analyzing populations during a simulation
   </a>
   <ul class="collapse-ul">
@@ -225,11 +224,14 @@
 
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        
+        <a class="dropdown-buttons"
+            href="_sources/preface.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/timeseries.rst"><button type="button"
+        <a class="dropdown-buttons" href="_sources/preface.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.rst</button></a>
+                data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -247,7 +249,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ForwardSimulation/fwdpy11_recipes/issues/new?title=Issue%20on%20page%20%2Ftimeseries.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ForwardSimulation/fwdpy11_recipes/issues/new?title=Issue%20on%20page%20%2Fpreface.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -263,6 +265,23 @@
 
         <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ForwardSimulation/fwdpy11_recipes/main?urlpath=tree/book/preface.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
     </div>
 
     <!-- Table of contents -->
@@ -275,9 +294,32 @@
         
               <div>
                 
-  <div class="section" id="analyzing-populations-during-a-simulation">
-<span id="timeseries"></span><h1>Analyzing populations during a simulation<a class="headerlink" href="#analyzing-populations-during-a-simulation" title="Permalink to this headline">¶</a></h1>
-<p>This section covers how to record data from a running simulaiton.</p>
+  <div class="section" id="preface">
+<h1>Preface<a class="headerlink" href="#preface" title="Permalink to this headline">¶</a></h1>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
+<span class="kn">import</span> <span class="nn">fwdpy11</span>
+<span class="n">fp11_version</span> <span class="o">=</span> <span class="n">fwdpy11</span><span class="o">.</span><span class="n">__version__</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;fwdpy11_version&quot;</span><span class="p">,</span> <span class="n">fp11_version</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>This book provides additional recipes for the <a class="reference external" href="https://github.com/molpopgen/fwdpy11">fwdpy11</a> simulation software.
+The recipes complement examples found in the <a class="reference external" href="https://fwdpy11.readthedocs.io">primary documentation</a>.
+Some recipes may be repeated here.</p>
+<p>The contents of this book are generated using <code class="docutils literal notranslate"><span class="pre">fwdpy11</span></code> version <span class="pasted-inline"><code class="output text_plain docutils literal notranslate"><span class="pre">'0.12.0'</span></code></span>.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -310,8 +352,7 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="discretedemography.html" title="previous page">Demographic models (soft selection and discrete demes)</a>
-    <a class='right-next' id="next-link" href="timeseries/pyfreqtracker.html" title="next page">Tracking mutations over time</a>
+    <a class='right-next' id="next-link" href="introduction.html" title="next page">Background information</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

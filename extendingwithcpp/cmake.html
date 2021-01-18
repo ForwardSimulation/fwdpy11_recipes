@@ -5,49 +5,49 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Analyzing populations during a simulation &#8212; fwdpy11_recipes</title>
+    <title>Building with cmake &#8212; fwdpy11_recipes</title>
     
-  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
     
   <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     
       
   <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
   <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
-    <link rel="stylesheet" type="text/css" href="_static/thebelab.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/thebelab-helper.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/thebelab-helper.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -56,11 +56,10 @@
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
     </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tracking mutations over time" href="timeseries/pyfreqtracker.html" />
-    <link rel="prev" title="Demographic models (soft selection and discrete demes)" href="discretedemography.html" />
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Tracking mutations over time using C++" href="cppfreqtracker.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -77,20 +76,20 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
+<a class="navbar-brand text-wrap" href="../index.html">
   
   
   <h1 class="site-logo" id="site-title">fwdpy11_recipes</h1>
   
 </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form>
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
+  <a class="reference internal" href="../preface.html">
    Preface
   </a>
  </li>
@@ -102,7 +101,7 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
+  <a class="reference internal" href="../introduction.html">
    Background information
   </a>
  </li>
@@ -114,12 +113,12 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="des.html">
+  <a class="reference internal" href="../des.html">
    Distributions of effect sizes
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="recombination.html">
+  <a class="reference internal" href="../recombination.html">
    Genetic maps and recombination
   </a>
  </li>
@@ -131,7 +130,7 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="discretedemography.html">
+  <a class="reference internal" href="../discretedemography.html">
    Demographic models (soft selection and discrete demes)
   </a>
  </li>
@@ -141,14 +140,14 @@
   Processing simulations
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active collapsible-parent">
-  <a class="current reference internal" href="#">
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../timeseries.html">
    Analyzing populations during a simulation
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="timeseries/pyfreqtracker.html">
+    <a class="reference internal" href="../timeseries/pyfreqtracker.html">
      Tracking mutations over time
     </a>
    </li>
@@ -162,19 +161,19 @@
   Extending fwdpy11 with C++
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="extendingwithcpp.html">
+  <a class="reference internal" href="../extendingwithcpp.html">
    Introduction
   </a>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="extendingwithcpp/timeseries.html">
+  <a class="reference internal" href="timeseries.html">
    Analyzing population during a simulation (using C++)
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="extendingwithcpp/cppfreqtracker.html">
+    <a class="reference internal" href="cppfreqtracker.html">
      Tracking mutations over time using C++
     </a>
    </li>
@@ -182,8 +181,8 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="extendingwithcpp/cmake.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Building with cmake
   </a>
  </li>
@@ -227,7 +226,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/timeseries.rst"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/extendingwithcpp/cmake.rst"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.rst</button></a>
         <!-- Download PDF via print -->
@@ -247,7 +246,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ForwardSimulation/fwdpy11_recipes/issues/new?title=Issue%20on%20page%20%2Ftimeseries.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ForwardSimulation/fwdpy11_recipes/issues/new?title=Issue%20on%20page%20%2Fextendingwithcpp/cmake.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -275,10 +274,38 @@
         
               <div>
                 
-  <div class="section" id="analyzing-populations-during-a-simulation">
-<span id="timeseries"></span><h1>Analyzing populations during a simulation<a class="headerlink" href="#analyzing-populations-during-a-simulation" title="Permalink to this headline">¶</a></h1>
-<p>This section covers how to record data from a running simulaiton.</p>
-<div class="toctree-wrapper compound">
+  <div class="section" id="building-with-cmake">
+<h1>Building with cmake<a class="headerlink" href="#building-with-cmake" title="Permalink to this headline">¶</a></h1>
+<p>It is arguably easiest to build extension with <a class="reference external" href="https://www.cmake.org">cmake</a>.
+The <cite>pybind11</cite> <a class="reference external" href="https://pybind11.readthedocs.io/en/stable/">documentation</a> gives instructions on how to do so.</p>
+<p>The <cite>CMakeLists.txt</cite> to build the C++ components of the <cite>fp11recipes</cite> module accompanying this book looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cmake_minimum_required(VERSION 2.8.12)
+project(fp11recipes_modules)
+
+# As of 0.8.0, fwdpy11
+# is compiled with the C++14 language
+# standard (-std=c++14)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD 14) 
+find_package(pybind11)
+message(STATUS &quot;Found pybind11: ${pybind11_VERSION}&quot;)
+if(${pybind11_VERSION} VERSION_LESS &#39;2.6.0&#39;)
+    message(FATAL_ERROR &quot;pybind11 version must be &gt;= &#39;2.6.0&#39;&quot;)
+endif()
+
+execute_process(COMMAND python3 -m fwdpy11 --fwdpy11_headers OUTPUT_VARIABLE FP11HEADERS)
+execute_process(COMMAND python3 -m fwdpy11 --fwdpp_headers OUTPUT_VARIABLE FWDPPHEADERS)
+
+find_package(GSL REQUIRED)
+include_directories(BEFORE ${FP11HEADERS} ${FWDPPHEADERS})
+message(STATUS &quot;GSL headers in ${GSL_INCLUDE_DIRS}&quot;)
+include_directories(BEFORE ${GSL_INCLUDE_DIRS})
+
+set(CMAKE_CXX_FLAGS  &quot;${CMAKE_CXX_FLAGS} -Wall&quot;)
+
+pybind11_add_module(freqtrackercpp MODULE freqtrackercpp.cc)
+target_link_libraries(freqtrackercpp PRIVATE GSL::gsl GSL::gslcblas)
+</pre></div>
 </div>
 </div>
 
@@ -295,7 +322,7 @@
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./."
+            path: "./extendingwithcpp"
         },
         predefinedOutput: true
     }
@@ -310,8 +337,7 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="discretedemography.html" title="previous page">Demographic models (soft selection and discrete demes)</a>
-    <a class='right-next' id="next-link" href="timeseries/pyfreqtracker.html" title="next page">Tracking mutations over time</a>
+    <a class='left-prev' id="prev-link" href="cppfreqtracker.html" title="previous page">Tracking mutations over time using C++</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
@@ -331,7 +357,7 @@
     </div>
 
     
-  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
 
 
     
