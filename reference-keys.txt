@@ -3,6 +3,7 @@ fig:unnamed-chunk-3
 fig:plotcppfreqtrackeroutput
 preface
 introduction
+modern-python
 key-imports
 distributions-of-effect-sizes
 genetic-maps-and-recombination
