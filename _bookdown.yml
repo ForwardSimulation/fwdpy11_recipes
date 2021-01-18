@@ -4,6 +4,7 @@ rmd_files:
         "chapters/des.Rmd",
         "chapters/recombination.Rmd",
         "chapters/discretedemography.Rmd",
+        "chapters/timeseries.Rmd",
         "chapters/extendingwithcpp.Rmd",
         ]
 output_dir: book_output

@@ -1,0 +1,106 @@
+# Analyzing populations during a simulation {#timeseries}
+
+
+## Tracking mutations over time {#freqtrackpy}
+
+:::: { .center }
+
+::: { .lavenderbox }
+This section makes use of keyword-only arguments to `fwdpy11.evolvets`.
+Many of those arguments are somewhat experimental in nature.
+:::
+
+::::
+
+This recipe covers tracking the frequencies of all mutations over time during a simulation using a time series recorder.
+Such tracking requires care, as it is not a common use case.
+Internally, `fwdpy11` doesn't really care about how often each mutation is present in the population.
+Usually, the simulation only needs to know if a mutation was removed by simplification, or remains somewhere in the ancestry of the population.
+Therefore, to track frequencies, we need to work a little harder.
+
+The following listing shows how we will track frequencies.
+The key elements are:
+
+* We initialize instances of the recorder with a "burn-in" time.
+  We do not do anything until the population's generation is greater than that value.
+  This check allows us to more quickly simulate to equilibrium, which we'll explain in more detail below.
+* We record trajectories in a Python dictionary.
+  The key will be tuples of `(origin time, position, effect size)`.
+  The value will be the count of the mutation each generation.
+* We take special care to not record the count of a fixation over and over again.
+
+```{python pyfreqtracker, code=xfun::read_utf8('recipes/timeseries/pyfreqtracker.py')}
+```
+
+Now, let's simulate a model of a high rate of recurrent hitch-hiking:
+
+```{python runpyfreqtracker, code=xfun::read_utf8('recipes/timeseries/runpyfreqtracker.py')}
+```
+
+The arguments to `fwdpy11.evolvets` need some explanation.
+We simplify every 10 generations.
+Setting `track_mutation_counts=True` tells the function to obtain mutation counts from diploid genomes every generation.
+Setting `suppress_table_indexing=False` tells `fwdpy11` to index the tables after  every simplification event.
+In generations when simplification occurs, mutation counts are obtained from trees and not from genomes.
+
+:::: { .center }
+
+::: { .lavenderbox }
+The current default behavior of `fwdpy11.evolvets` is to set `suppress_table_indexing=False`.
+However, future releases will likely set that to `True`.
+This recipe is written in anticipation of that change.
+:::
+
+::::
+
+### Converting trajectories to data frames
+
+We can easily do a lot of analysis from `recorder.trajectories`.
+However, there are good reasons to convert things into common formats for analysis, such as the [pandas](https://pandas.pydata.org) data frame:
+
+```{python traj2df, code=xfun::read_utf8('recipes/timeseries/traj2df.py')}
+```
+
+### Plotting the  trajectories
+
+Here is a function to plot all trajectories, eliminating those with sojourn times $< minlen$ generations:
+
+```{python plot_traj_df, code=xfun::read_utf8('recipes/timeseries/plot_traj_df.py')}
+```
+
+```{python plotpyfreqtrackeroutput, fig.cap="So many sweeps!"}
+df = traj2df(recorder.trajectories, pop.N)
+plot_traj_df(df, minlen=10)
+```
+
+### Tracking the frequencies of neutral mutations
+
+One generally doesn't simulate neutral mutations.
+However, certain questions regarding linked selection may force you to do so.
+Neutral mutations *do not* get added to diploid genomes (in order to save memory), and thus will their counts are not obtained via `track_mutation_counts=True`.
+The solution is:
+
+* Simplify every generation, so that counts can be obtained from the trees.
+
+```{python, code=xfun::read_utf8('recipes/timeseries/runpyfreqtrackerwithneutralmutations.py')}
+```
+
+Here, we do not need `track_mutation_counts=True` because simplifying each generation ends up accomplishing the same thing (for neutral and for selected variants).
+
+Let's take a look at the plot.
+We will reduce the opacity of selected variants to make the neutral ones pop a bit more:
+
+```{python, fig.cap="Hitch-hiking! Neutral mutation trajectories are dashed lines.  The selected variant tajectories are shown with reduced opacity."}
+df = traj2df(recorder.trajectories, pop.N)
+plot_traj_df(df, minlen=10, selected_alpha=0.10)
+```
+
+### Other considerations
+
+This recipe needs adjustment for the following cases:
+
+* Tracking mutation frequencies with respect to deme.
+* Tracking mutation frequencies in demes that change size.
+
+While this tracker is quite simple to write, performance may be an issue for very large simulations.
+To further improve performance, see \@ref(freqtrackcpp).
