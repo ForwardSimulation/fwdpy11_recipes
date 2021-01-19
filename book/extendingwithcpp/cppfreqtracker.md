@@ -56,9 +56,20 @@ fwdpy11.evolvets(
 We will reuse code from the previous recipe to convert the output to a data frame and plot:
 
 ```{code-cell} python
+:tags: ["hide-input", "remove-output"]
 import fp11recipes
+from myst_nb import glue
+
 df = fp11recipes.traj2df(recorder.trajectories, pop.N)
-fp11recipes.plot_traj_df(df, minlen=10)
+f, ax = fp11recipes.plot_traj_df(df, minlen=10)
+glue("cppfreqtrackfig", f, display=False)
+```
+
+```{glue:figure} cppfreqtrackfig
+:name: 'cppfreqtrackfig'
+
+Some sweeps from new mutations.
+This should look identical to {numref}`pyfreqtrackfig`.
 ```
 
 ## The C++ code

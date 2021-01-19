@@ -17,6 +17,7 @@ kernelspec:
 :tags: ["remove-cell"]
 # Make sure we can import fp11recipes
 import sys
+
 sys.path.append("../..")
 ```
 
@@ -116,25 +117,31 @@ However, there are good reasons to convert things into common formats for analys
 ```{literalinclude} ../../fp11recipes/traj2df.py
 ```
 
+This function is part of the `fp11recipes` module for this book.
+
 ## Plotting the  trajectories
 
-Here is a function to plot all trajectories, eliminating those with sojourn times $< minlen$ generations:
+Here is a function to plot all trajectories, eliminating those with sojourn times $< minlen$ generations.
+The function is also part of the `fp11recipes` module for this book.
 
 ```{literalinclude} ../../fp11recipes/plot_traj_df.py
 ```
 
 ```{code-cell} python
----
-render:
-  figure:
-    caption: |
-      A caption
-    name: testfig
----
+:tags: ["hide-input", "remove-output"]
+
 import fp11recipes
+from myst_nb import glue
 
 df = fp11recipes.traj2df(recorder.trajectories, pop.N)
-fp11recipes.plot_traj_df(df, minlen=10)
+f, ax = fp11recipes.plot_traj_df(df, minlen=10)
+glue("pyfreqtrackfig", f, display=False)
+```
+
+```{glue:figure} pyfreqtrackfig
+:name: 'pyfreqtrackfig'
+
+Some sweeps from new mutations.
 ```
 
 ## Tracking the frequencies of neutral mutations
@@ -177,8 +184,19 @@ Let's take a look at the plot.
 We will reduce the opacity of selected variants to make the neutral ones pop a bit more:
 
 ```{code-cell} python
+:tags: ["hide-input", "remove-output"]
+
 df = fp11recipes.traj2df(recorder.trajectories, pop.N)
-fp11recipes.plot_traj_df(df, minlen=10, selected_alpha=0.50)
+fn, ax = fp11recipes.plot_traj_df(df, minlen=10, selected_alpha=0.50)
+glue("pyfreqtrackfigneutral", fn, display=False)
+```
+
+```{glue:figure} pyfreqtrackfigneutral
+:name: 'pyfreqtrackfigneutral'
+
+The hitch-hiking effect.
+Dotted lines show the trajectories of neutral mutations.
+The selected variant trajectories have reduced opacity.
 ```
 
 ## Other considerations
