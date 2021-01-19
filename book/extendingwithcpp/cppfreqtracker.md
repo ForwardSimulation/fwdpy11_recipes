@@ -22,7 +22,7 @@ sys.path.append("../..")
 
 ## Running the tracker
 
-This recipe revisits the [Python frequency tracker](#freqtrackpy) using a tracker written in C++.
+This recipe revisits the [Python frequency tracker](freqtrackpy) using a tracker written in C++.
 The tracker's code is shown in the next section.
 First, let's run it:
 
