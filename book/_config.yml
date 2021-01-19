@@ -30,3 +30,4 @@ html:
 sphinx:
   extra_extensions:
    - jupyter_sphinx
+   - matplotlib.sphinxext.plot_directive
