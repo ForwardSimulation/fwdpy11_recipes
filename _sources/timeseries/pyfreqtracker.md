@@ -207,4 +207,4 @@ This recipe needs adjustment for the following cases:
 * Tracking mutation frequencies in demes that change size.
 
 While this tracker is quite simple to write, performance may be an issue for very large simulations.
-To further improve performance, see :ref:`freqtrackcpp`.
+To further improve performance, see {ref}`freqtrackcpp`.
