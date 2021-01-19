@@ -50,6 +50,8 @@
     <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -225,11 +227,14 @@
 
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        
+        <a class="dropdown-buttons"
+            href="../_sources/timeseries/pyfreqtracker.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/timeseries/pyfreqtracker.rst"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/timeseries/pyfreqtracker.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.rst</button></a>
+                data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -262,6 +267,23 @@
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ForwardSimulation/fwdpy11_recipes/main?urlpath=tree/book/timeseries/pyfreqtracker.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
 
     </div>
 
@@ -306,18 +328,14 @@
                 
   <div class="section" id="tracking-mutations-over-time">
 <span id="freqtrackpy"></span><h1>Tracking mutations over time<a class="headerlink" href="#tracking-mutations-over-time" title="Permalink to this headline">¶</a></h1>
-<div class="jupyter_cell docutils container">
-<div class="cell_output docutils container">
-</div>
-</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This section makes use of keyword-only arguments to <cite>fwdpy11.evolvets</cite>.
+<p>This section makes use of keyword-only arguments to <code class="docutils literal notranslate"><span class="pre">fwdpy11.evolvets</span></code>.
 Many of those arguments are somewhat experimental in nature.</p>
 </div>
 <p>This recipe covers tracking the frequencies of all mutations over time during a simulation using a time series recorder.
 Such tracking requires care, as it is not a common use case.
-Internally, <cite>fwdpy11</cite> doesn’t really care about how often each mutation is present in the population.
+Internally, <code class="docutils literal notranslate"><span class="pre">fwdpy11</span></code> doesn’t really care about how often each mutation is present in the population.
 Usually, the simulation only needs to know if a mutation was removed by simplification, or remains somewhere in the ancestry of the population.
 Therefore, to track frequencies, we need to work a little harder.</p>
 <p>The following listing shows how we will track frequencies.
@@ -327,13 +345,13 @@ The key elements are:</p>
 We do not do anything until the population’s generation is greater than that value.
 This check allows us to more quickly simulate to equilibrium, which we’ll explain in more detail below.</p></li>
 <li><p>We record trajectories in a Python dictionary.
-The key will be tuples of <cite>(origin time, position, effect size)</cite>.
+The key will be tuples of <code class="docutils literal notranslate"><span class="pre">(origin</span> <span class="pre">time,</span> <span class="pre">position,</span> <span class="pre">effect</span> <span class="pre">size)</span></code>.
 The value will be the count of the mutation each generation.</p></li>
 <li><p>We take special care to not record the count of a fixation over and over again.</p></li>
 </ul>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typing</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typing</span>
 <span class="kn">import</span> <span class="nn">attr</span>
 <span class="kn">import</span> <span class="nn">fwdpy11</span>
 
@@ -359,13 +377,11 @@ The value will be the count of the mutation each generation.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-</div>
 </div>
 <p>Now, let’s simulate a model of a high rate of recurrent hitch-hiking:</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdict</span> <span class="o">=</span> <span class="p">{</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pdict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;nregions&quot;</span><span class="p">:</span> <span class="p">[],</span>
     <span class="s2">&quot;sregions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">fwdpy11</span><span class="o">.</span><span class="n">ExpS</span><span class="p">(</span><span class="n">beg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)],</span>
     <span class="s2">&quot;recregions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">fwdpy11</span><span class="o">.</span><span class="n">PoissonInterval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">)],</span>
@@ -389,24 +405,22 @@ The value will be the count of the mutation each generation.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
 </div>
-</div>
-<p>The arguments to <cite>fwdpy11.evolvets</cite> need some explanation.
+<p>The arguments to <code class="docutils literal notranslate"><span class="pre">fwdpy11.evolvets</span></code> need some explanation.
 We simplify every 10 generations.
-Setting <cite>track_mutation_counts=True</cite> tells the function to obtain mutation counts from diploid genomes every generation.
-Setting <cite>suppress_table_indexing=False</cite> tells <cite>fwdpy11</cite> to index the tables after  every simplification event.
+Setting <code class="docutils literal notranslate"><span class="pre">track_mutation_counts=True</span></code> tells the function to obtain mutation counts from diploid genomes every generation.
+Setting <code class="docutils literal notranslate"><span class="pre">suppress_table_indexing=False</span></code> tells <code class="docutils literal notranslate"><span class="pre">fwdpy11</span></code> to index the tables after  every simplification event.
 In generations when simplification occurs, mutation counts are obtained from trees and not from genomes.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The current default behavior of <cite>fwdpy11.evolvets</cite> is to set <cite>suppress_table_indexing=False</cite>.
-However, future releases will likely set that to <cite>True</cite>.
+<p>The current default behavior of <code class="docutils literal notranslate"><span class="pre">fwdpy11.evolvets</span></code> is to set <code class="docutils literal notranslate"><span class="pre">suppress_table_indexing=False</span></code>.
+However, future releases will likely set that to <code class="docutils literal notranslate"><span class="pre">True</span></code>.
 This recipe is written in anticipation of that change.</p>
 </div>
 <div class="section" id="converting-trajectories-to-data-frames">
 <h2>Converting trajectories to data frames<a class="headerlink" href="#converting-trajectories-to-data-frames" title="Permalink to this headline">¶</a></h2>
-<p>We can easily do a lot of analysis from <cite>recorder.trajectories</cite>.
-However, there are good reasons to convert things into common formats for analysis, such as the [pandas](<a class="reference external" href="https://pandas.pydata.org">https://pandas.pydata.org</a>) data frame:</p>
+<p>We can easily do a lot of analysis from <code class="docutils literal notranslate"><span class="pre">recorder.trajectories</span></code>.
+However, there are good reasons to convert things into common formats for analysis, such as the <a class="reference external" href="https://pandas.pydata.org">pandas</a> data frame:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typing</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -429,57 +443,67 @@ However, there are good reasons to convert things into common formats for analys
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dfs</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>This function is part of the <code class="docutils literal notranslate"><span class="pre">fp11recipes</span></code> module for this book.</p>
 </div>
 <div class="section" id="plotting-the-trajectories">
 <h2>Plotting the  trajectories<a class="headerlink" href="#plotting-the-trajectories" title="Permalink to this headline">¶</a></h2>
-<p>Here is a function to plot all trajectories, eliminating those with sojourn times $&lt; minlen$ generations:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<p>Here is a function to plot all trajectories, eliminating those with sojourn times <span class="math notranslate nohighlight">\(&lt; minlen\)</span> generations.
+The function is also part of the <code class="docutils literal notranslate"><span class="pre">fp11recipes</span></code> module for this book.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 
 <span class="k">def</span> <span class="nf">plot_traj_df</span><span class="p">(</span>
     <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">minlen</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">selected_alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">neutral_alpha</span><span class="o">=</span><span class="mf">1.0</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">minlen</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;minlen must be non-negative, got </span><span class="si">{</span><span class="n">minlen</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;origin_time&quot;</span><span class="p">,</span> <span class="s2">&quot;position&quot;</span><span class="p">,</span> <span class="s2">&quot;effect_size&quot;</span><span class="p">]):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">minlen</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">effect_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">generation</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">frequency</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">neutral_alpha</span><span class="p">)</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">generation</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">frequency</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">neutral_alpha</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">generation</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">frequency</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">selected_alpha</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (generation)&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">generation</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">frequency</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">selected_alpha</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time (generation)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">ax</span>
 </pre></div>
 </div>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fp11recipes</span>
+<div class="cell tag_hide-input tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fp11recipes</span>
+<span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">fp11recipes</span><span class="o">.</span><span class="n">traj2df</span><span class="p">(</span><span class="n">recorder</span><span class="o">.</span><span class="n">trajectories</span><span class="p">,</span> <span class="n">pop</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
-<span class="n">fp11recipes</span><span class="o">.</span><span class="n">plot_traj_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">minlen</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fp11recipes</span><span class="o">.</span><span class="n">plot_traj_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">minlen</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;pyfreqtrackfig&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/pyfreqtracker_3_0.png" src="../_images/pyfreqtracker_3_0.png" />
 </div>
+<div class="figure align-default" id="pyfreqtrackfig">
+<div class="cell_output docutils container">
+<img alt="../_images/pyfreqtracker_7_0.png" src="../_images/pyfreqtracker_7_0.png" />
+</div>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Some sweeps from new mutations.</span><a class="headerlink" href="#pyfreqtrackfig" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="tracking-the-frequencies-of-neutral-mutations">
 <h2>Tracking the frequencies of neutral mutations<a class="headerlink" href="#tracking-the-frequencies-of-neutral-mutations" title="Permalink to this headline">¶</a></h2>
 <p>One generally doesn’t simulate neutral mutations.
 However, certain questions regarding linked selection may force you to do so.
-Neutral mutations <em>do not</em> get added to diploid genomes (in order to save memory), and thus will their counts are not obtained via <cite>track_mutation_counts=True</cite>.
+Neutral mutations <em>do not</em> get added to diploid genomes (in order to save memory), and thus will their counts are not obtained via <code class="docutils literal notranslate"><span class="pre">track_mutation_counts=True</span></code>.
 The solution is:</p>
 <ul class="simple">
 <li><p>Simplify every generation, so that counts can be obtained from the trees.</p></li>
 </ul>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pdict</span> <span class="o">=</span> <span class="p">{</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pdict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># Add a region for neutral mutations:</span>
     <span class="s2">&quot;nregions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">fwdpy11</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span>
     <span class="s2">&quot;sregions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">fwdpy11</span><span class="o">.</span><span class="n">ExpS</span><span class="p">(</span><span class="n">beg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)],</span>
@@ -504,22 +528,26 @@ The solution is:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
 </div>
-</div>
-<p>Here, we do not need <cite>track_mutation_counts=True</cite> because simplifying each generation ends up accomplishing the same thing (for neutral and for selected variants).</p>
+<p>Here, we do not need <code class="docutils literal notranslate"><span class="pre">track_mutation_counts=True</span></code> because simplifying each generation ends up accomplishing the same thing (for neutral and for selected variants).</p>
 <p>Let’s take a look at the plot.
 We will reduce the opacity of selected variants to make the neutral ones pop a bit more:</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">fp11recipes</span><span class="o">.</span><span class="n">traj2df</span><span class="p">(</span><span class="n">recorder</span><span class="o">.</span><span class="n">trajectories</span><span class="p">,</span> <span class="n">pop</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
-<span class="n">fp11recipes</span><span class="o">.</span><span class="n">plot_traj_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">minlen</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">selected_alpha</span><span class="o">=</span><span class="mf">0.50</span><span class="p">)</span>
+<div class="cell tag_hide-input tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">fp11recipes</span><span class="o">.</span><span class="n">traj2df</span><span class="p">(</span><span class="n">recorder</span><span class="o">.</span><span class="n">trajectories</span><span class="p">,</span> <span class="n">pop</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+<span class="n">fn</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fp11recipes</span><span class="o">.</span><span class="n">plot_traj_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">minlen</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">selected_alpha</span><span class="o">=</span><span class="mf">0.50</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;pyfreqtrackfigneutral&quot;</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/pyfreqtracker_5_0.png" src="../_images/pyfreqtracker_5_0.png" />
 </div>
+<div class="figure align-default" id="pyfreqtrackfigneutral">
+<div class="cell_output docutils container">
+<img alt="../_images/pyfreqtracker_11_0.png" src="../_images/pyfreqtracker_11_0.png" />
+</div>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">The hitch-hiking effect.
+Dotted lines show the trajectories of neutral mutations.
+The selected variant trajectories have reduced opacity.</span><a class="headerlink" href="#pyfreqtrackfigneutral" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="other-considerations">
@@ -530,7 +558,7 @@ We will reduce the opacity of selected variants to make the neutral ones pop a b
 <li><p>Tracking mutation frequencies in demes that change size.</p></li>
 </ul>
 <p>While this tracker is quite simple to write, performance may be an issue for very large simulations.
-To further improve performance, see <a class="reference internal" href="../extendingwithcpp/cppfreqtracker.html#freqtrackcpp"><span class="std std-ref">Tracking mutations over time using C++</span></a>.</p>
+To further improve performance, see :ref:<code class="docutils literal notranslate"><span class="pre">freqtrackcpp</span></code>.</p>
 </div>
 </div>
 

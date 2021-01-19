@@ -50,6 +50,8 @@
     <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -226,9 +228,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/extendingwithcpp/cmake.rst"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/extendingwithcpp/cmake.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.rst</button></a>
+                data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -277,34 +279,34 @@
   <div class="section" id="building-with-cmake">
 <h1>Building with cmake<a class="headerlink" href="#building-with-cmake" title="Permalink to this headline">¶</a></h1>
 <p>It is arguably easiest to build extension with <a class="reference external" href="https://www.cmake.org">cmake</a>.
-The <cite>pybind11</cite> <a class="reference external" href="https://pybind11.readthedocs.io/en/stable/">documentation</a> gives instructions on how to do so.</p>
-<p>The <cite>CMakeLists.txt</cite> to build the C++ components of the <cite>fp11recipes</cite> module accompanying this book looks like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cmake_minimum_required(VERSION 2.8.12)
-project(fp11recipes_modules)
+The <code class="docutils literal notranslate"><span class="pre">pybind11</span></code> <a class="reference external" href="https://pybind11.readthedocs.io/en/stable">documentation</a> gives instructions on how to do so.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> to build the C++ components of the <code class="docutils literal notranslate"><span class="pre">fp11recipes</span></code> module accompanying this book looks like this:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8.12</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">fp11recipes_modules</span><span class="p">)</span>
 
-# As of 0.8.0, fwdpy11
-# is compiled with the C++14 language
-# standard (-std=c++14)
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_STANDARD 14) 
-find_package(pybind11)
-message(STATUS &quot;Found pybind11: ${pybind11_VERSION}&quot;)
-if(${pybind11_VERSION} VERSION_LESS &#39;2.6.0&#39;)
-    message(FATAL_ERROR &quot;pybind11 version must be &gt;= &#39;2.6.0&#39;&quot;)
-endif()
+<span class="c"># As of 0.8.0, fwdpy11</span>
+<span class="c"># is compiled with the C++14 language</span>
+<span class="c"># standard (-std=c++14)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_EXTENSIONS</span> <span class="s">OFF</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">14</span><span class="p">)</span> 
+<span class="nb">find_package</span><span class="p">(</span><span class="s">pybind11</span><span class="p">)</span>
+<span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span> <span class="s2">&quot;Found pybind11: ${pybind11_VERSION}&quot;</span><span class="p">)</span>
+<span class="nb">if</span><span class="p">(</span><span class="o">${</span><span class="nv">pybind11_VERSION</span><span class="o">}</span> <span class="s">VERSION_LESS</span> <span class="s">&#39;2.6.0&#39;</span><span class="p">)</span>
+    <span class="nb">message</span><span class="p">(</span><span class="s">FATAL_ERROR</span> <span class="s2">&quot;pybind11 version must be &gt;= &#39;2.6.0&#39;&quot;</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
 
-execute_process(COMMAND python3 -m fwdpy11 --fwdpy11_headers OUTPUT_VARIABLE FP11HEADERS)
-execute_process(COMMAND python3 -m fwdpy11 --fwdpp_headers OUTPUT_VARIABLE FWDPPHEADERS)
+<span class="nb">execute_process</span><span class="p">(</span><span class="s">COMMAND</span> <span class="s">python3</span> <span class="s">-m</span> <span class="s">fwdpy11</span> <span class="s">--fwdpy11_headers</span> <span class="s">OUTPUT_VARIABLE</span> <span class="s">FP11HEADERS</span><span class="p">)</span>
+<span class="nb">execute_process</span><span class="p">(</span><span class="s">COMMAND</span> <span class="s">python3</span> <span class="s">-m</span> <span class="s">fwdpy11</span> <span class="s">--fwdpp_headers</span> <span class="s">OUTPUT_VARIABLE</span> <span class="s">FWDPPHEADERS</span><span class="p">)</span>
 
-find_package(GSL REQUIRED)
-include_directories(BEFORE ${FP11HEADERS} ${FWDPPHEADERS})
-message(STATUS &quot;GSL headers in ${GSL_INCLUDE_DIRS}&quot;)
-include_directories(BEFORE ${GSL_INCLUDE_DIRS})
+<span class="nb">find_package</span><span class="p">(</span><span class="s">GSL</span> <span class="s">REQUIRED</span><span class="p">)</span>
+<span class="nb">include_directories</span><span class="p">(</span><span class="s">BEFORE</span> <span class="o">${</span><span class="nv">FP11HEADERS</span><span class="o">}</span> <span class="o">${</span><span class="nv">FWDPPHEADERS</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span> <span class="s2">&quot;GSL headers in ${GSL_INCLUDE_DIRS}&quot;</span><span class="p">)</span>
+<span class="nb">include_directories</span><span class="p">(</span><span class="s">BEFORE</span> <span class="o">${</span><span class="nv">GSL_INCLUDE_DIRS</span><span class="o">}</span><span class="p">)</span>
 
-set(CMAKE_CXX_FLAGS  &quot;${CMAKE_CXX_FLAGS} -Wall&quot;)
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_FLAGS</span>  <span class="s2">&quot;${CMAKE_CXX_FLAGS} -Wall&quot;</span><span class="p">)</span>
 
-pybind11_add_module(freqtrackercpp MODULE freqtrackercpp.cc)
-target_link_libraries(freqtrackercpp PRIVATE GSL::gsl GSL::gslcblas)
+<span class="nb">pybind11_add_module</span><span class="p">(</span><span class="s">freqtrackercpp</span> <span class="s">MODULE</span> <span class="s">freqtrackercpp.cc</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">freqtrackercpp</span> <span class="s">PRIVATE</span> <span class="s">GSL::gsl</span> <span class="s">GSL::gslcblas</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
