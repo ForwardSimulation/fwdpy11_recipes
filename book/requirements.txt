@@ -1,3 +1,11 @@
 jupyter-book
-matplotlib
+attrs
 numpy
+pandas
+scipy
+sparse
+black
+msprime
+matplotlib
+seaborn
+fwdpy11

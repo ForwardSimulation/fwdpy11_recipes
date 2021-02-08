@@ -35,7 +35,7 @@ jobs:
         with:
           path: |
             ~/.local
-          key: ${{ matrix.python }}-${{ hashFiles('requirements/requirements.txt') }}
+          key: ${{ matrix.python }}-${{ hashFiles('book/requirements.txt') }}
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
@@ -65,7 +65,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --user  "pybind11[global]"
-          python -m pip install --user --upgrade -r requirements/requirements.txt
+          python -m pip install --user --upgrade -r book/requirements.txt
 
       - name: Test that fwdpy11 is discoverable
         run: |
