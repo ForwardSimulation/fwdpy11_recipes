@@ -26,7 +26,7 @@
 - part: Extending fwdpy11 with C++
   chapters:
   - file: extendingwithcpp
-  - file: extendingwithcpp/timeseries
+  - file: extendingwithcpp/cpptimeseries
     sections:
       - file: extendingwithcpp/cppfreqtracker
   - file: extendingwithcpp/cmake
